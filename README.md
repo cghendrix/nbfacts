@@ -9,6 +9,9 @@
 3. MySQL - Hosted as an instance on GCP SQL
 3. Vue/Nuxt - Frontend application that displays the latest facts
 
+![Architecture](diagram.png)
+
+
 View the API here: https://nbfacts.com/api/v1/swagger/index.html
 
 Future considerations:
