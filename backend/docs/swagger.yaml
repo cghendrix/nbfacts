@@ -1,0 +1,129 @@
+definitions:
+  facts.CreateFactRequest:
+    properties:
+      body:
+        type: string
+      info:
+        type: string
+    type: object
+  facts.UpdateFactRequest:
+    properties:
+      body:
+        type: string
+      info:
+        type: string
+      updated:
+        type: string
+    type: object
+  models.Fact:
+    properties:
+      body:
+        type: string
+      date_added:
+        type: string
+      date_updated:
+        type: string
+      id:
+        type: string
+      info:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /fact/:
+    post:
+      consumes:
+      - application/json
+      description: Adds a fact
+      parameters:
+      - description: Fact to create
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/facts.CreateFactRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+      summary: Adds a fact
+      tags:
+      - facts
+    put:
+      consumes:
+      - application/json
+      description: Updates a fact
+      parameters:
+      - description: Fact to create
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/facts.UpdateFactRequest'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+      summary: Updates a fact
+      tags:
+      - facts
+  /fact/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Deletes a fact
+      parameters:
+      - description: Fact Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+      summary: Deletes a fact
+      tags:
+      - facts
+    get:
+      consumes:
+      - application/json
+      description: Gets a single fact by its id
+      parameters:
+      - description: Fact Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Fact'
+      summary: Gets a fact by id
+      tags:
+      - facts
+  /facts/:
+    get:
+      consumes:
+      - application/json
+      description: Gets the most recent nickleback facts sorted by date added
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Fact'
+            type: array
+      summary: Get the latest facts
+      tags:
+      - facts
+swagger: "2.0"

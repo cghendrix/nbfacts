@@ -1,0 +1,7 @@
+.nuxt/
+.output/
+dist/
+node_modules/
+
+nginx/nbfacts.crt
+nginx/nbfacts.key
