@@ -5,9 +5,12 @@
 
 ## Architecture
 1. Golang API - Dockerized container running on GCP Compute VMs
-2. Nginx - Acts as a reverse proxy to Golang API / hosts Nuxt Frontend and Swagger
-3. MySQL - Hosted as an instance on GCP SQL
-3. Vue/Nuxt - Frontend application that displays the latest facts
+2. Golang Worker - Dockerized container running on GCP Compute VMs 
+3. Nginx - Acts as a reverse proxy to Golang API / hosts Nuxt Frontend and Swagger
+4. MySQL - Hosted as an instance on GCP SQL
+5. Vue/Nuxt - Frontend application that displays the latest facts
+6. PubSub - Broker between incoming sms webhook and application
+7. Function - serverless function that takes incoming webhook sms events and publishes to topic
 
 ![Architecture](diagram.png)
 
