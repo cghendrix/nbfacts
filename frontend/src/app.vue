@@ -22,6 +22,7 @@ function formatDateDay(date) {
           {{ fact.body }}
           <br/>
           <time>Added on {{ formatDateDay(fact.date_added) }}</time>
+          <span id="via-sms" v-if="fact.sms_id !== null"> - Added via SMS</span>
         </li>
       </ul>
       <p v-else>No facts to show</p>
