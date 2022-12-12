@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	webhookingester "cghendrix/nbfacts/webhooks"
 	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -18,6 +19,8 @@ var rootCmd = &cobra.Command{
 				startServer()
 			case "worker":
 				startPubSubWorker()
+			case "local_webhook_handler":
+				webhookingester.StartServer()
 			}
 		}
 	},
