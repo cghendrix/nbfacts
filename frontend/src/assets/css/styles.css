@@ -23,6 +23,15 @@ header > h1 {
     font-weight: 700;
 }
 
+header > a {
+    color: #9ca3af;
+}
+
+header > a:hover {
+    color: #232323;
+    text-decoration: underline;
+}
+
 header > button {
     background-color: #515e72;
     color: #e2e2e2;
