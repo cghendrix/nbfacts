@@ -12,4 +12,6 @@ docker buildx build \
 
 ## To build locally
 
-```docker build --build-arg DB_USER=${DB_USER} --build-arg DB_PASS=${DB_PASS} -t nbfactsserver  . && docker run -p 80:80 -it nbfactsserver ```
+```
+docker build --build-arg COMMAND=server --build-arg DB_USER=${DB_USER} --build-arg DB_PASS=${DB_PASS} -t nbfactsserver . && docker run -p 80:80 -it nbfactsserver
+ ```
