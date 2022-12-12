@@ -1,5 +1,8 @@
 FROM golang:1.19.3-alpine3.17
 
+ARG COMMAND
+ENV COMMAND=$COMMAND
+
 ARG DB_USER
 ENV DB_USER=$DB_USER
 ARG DB_PASS
@@ -9,5 +12,5 @@ RUN mkdir /app
 ADD . /app
 WORKDIR /app
 
-RUN go build -o server .
-CMD ["/app/server"]
+RUN go build
+ENTRYPOINT /app/nbfacts $COMMAND
