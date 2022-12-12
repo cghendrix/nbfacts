@@ -2,6 +2,8 @@ package facts
 
 import (
 	"cghendrix/nbfacts/models"
+	"context"
+	"database/sql"
 	"github.com/gin-gonic/gin"
 )
 
@@ -9,6 +11,7 @@ type Service interface {
 	GetFacts(c *gin.Context) ([]models.Fact, error)
 	GetFact(c *gin.Context, id string) (models.Fact, error)
 	AddFact(c *gin.Context, request CreateFactRequest) error
+	AddFactFromSMS(ctx context.Context, tx *sql.Tx, request CreateFactFromSMSRequest) error
 	UpdateFact(c *gin.Context, request UpdateFactRequest) error
 	DeleteFact(c *gin.Context, id string) error
 }
@@ -39,6 +42,14 @@ func (s service) GetFact(c *gin.Context, id string) (models.Fact, error) {
 
 func (s service) AddFact(c *gin.Context, request CreateFactRequest) error {
 	err := s.repo.AddFact(c, request)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s service) AddFactFromSMS(ctx context.Context, tx *sql.Tx, request CreateFactFromSMSRequest) error {
+	err := s.repo.AddFactFromSMS(ctx, tx, request)
 	if err != nil {
 		return err
 	}

@@ -2,6 +2,8 @@ package facts
 
 import (
 	"cghendrix/nbfacts/models"
+	"context"
+	"database/sql"
 	"github.com/gin-gonic/gin"
 	"github.com/jmoiron/sqlx"
 )
@@ -10,6 +12,7 @@ type Repository interface {
 	GetFacts(c *gin.Context) ([]models.Fact, error)
 	GetFactById(c *gin.Context, id string) (models.Fact, error)
 	AddFact(c *gin.Context, request CreateFactRequest) error
+	AddFactFromSMS(ctx context.Context, tx *sql.Tx, request CreateFactFromSMSRequest) error
 	UpdateFact(c *gin.Context, request UpdateFactRequest) error
 	DeleteFact(c *gin.Context, id string) error
 }
@@ -62,6 +65,21 @@ func (r repository) AddFact(c *gin.Context, request CreateFactRequest) error {
 		    (?, ?)
 	`
 	_, err := r.DB.ExecContext(c, query, request.Body, request.Info)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (r repository) AddFactFromSMS(ctx context.Context, tx *sql.Tx, request CreateFactFromSMSRequest) error {
+	query := `
+		INSERT INTO 
+		    fact 
+		    (body, info, sms_id)
+		VALUES
+		    (?, ?, ?)
+	`
+	_, err := tx.ExecContext(ctx, query, request.Body, request.Info, request.SmsId)
 	if err != nil {
 		return err
 	}
