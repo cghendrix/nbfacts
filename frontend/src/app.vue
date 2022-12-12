@@ -13,7 +13,8 @@ function formatDateDay(date) {
   <div>
     <header>
       <h1>Nickleback Facts</h1>
-      <h5>Served via Google Cloud Platform - Text your fact to: 209.208.2122</h5>
+      <h5>Served via Google Cloud Platform - Text your fact to: </h5>
+      <a href="tel:+12092082122">Text your favorite fact to 209.208.2122</a>
     </header>
     <main>
       <h2>Latest</h2>
